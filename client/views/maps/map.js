@@ -10,6 +10,11 @@ Template.mapMain.events({
     //Remove session variables
     Session.set('addingTree', undefined);
     Session.set('selectedTree', undefined);
+  },
+  'click #addTree':function(){
+    Session.set('addingTree', true);
+    $('#sidebar-wrapper').addClass('toggled');
+    $('#closePanel').addClass('toggled');
   }
 });
 
@@ -27,7 +32,14 @@ Template.mapMain.helpers({
               style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
               position: google.maps.ControlPosition.TOP_RIGHT
           },
-        };
+          zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.LEFT_CENTER
+          },
+          scaleControl: true,
+          streetViewControl: false
+        }
+
       }
     },
     selectedTree: function(){

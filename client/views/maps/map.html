@@ -4,7 +4,8 @@
   <div id="closePanel" class="close-button shadow hidden-xs">
     <a id="closeSide" href=""><span class="glyphicon glyphicon-chevron-left slide" ></span></a>
   </div>
-  <div id="sidebar-wrapper" class="hidden-xs shadow">
+  <div id="sidebar-wrapper" class="shadow">
+    <a id="closeSide" href="" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
       {{#if addingTree}}
         {{> addTree}}
       {{else}}
@@ -18,14 +19,29 @@
   <div id="map" class="map-container">
       {{> googleMap name="treeMap" options=exampleMapOptions}}
   </div>
-  <div id="bottombar-wrapper" class="visible-xs">
+
+  {{#if currentUser }}
+  <ul class="mfb-component--br mfb-zoomin">
+    <li class="mfb-component__wrap">
+      <a data-mfb-label="Add a Tree" class="mfb-component__button--main" href="" id="addTree">
+        <i class="mfb-component__main-icon--resting"><span class="glyphicon glyphicon-plus"></span></i>
+        <i class="mfb-component__main-icon--active glyphicon glyphicon-plus"><span class=""></span></i>
+      </a>
+    </li>
+  </ul>
+  {{/if}}
+  <!--<div id="bottombar-wrapper" class="visible-xs">
+    {{#if addingTree}}
+      {{> addTree}}
+    {{else}}
       {{#if selectedTree}}
-        <a id="closeSide" href="" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-          {{#with selectedTree}}
-            {{> mobileTree}}
-          {{/with}}
+      <a id="closeSide" href="" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+        {{#with selectedTree}}
+          {{> mobileTree}}
+        {{/with}}
       {{/if}}
-  </div>
+    {{/if}}
+  </div>-->
 </template>
 
 <template name="replace">

@@ -23,29 +23,6 @@
               About
             </a>
           </li>
-          {{#if currentUser }}
-
-          <li class="hidden-xs">
-            <a id="addTree" href="">
-              <span class="glyphicon glyphicon-plus"></span>
-              Add an Entry
-            </a>
-          </li>
-          <li class="{{ isActiveRoute 'uploadCSV' }}">
-            <a id="addTree" href="{{ pathFor 'uploadCSV'}}">
-              <span class="glyphicon glyphicon-upload"></span>
-              Upload CSV
-            </a>
-          </li>
-          <li class="{{ isActiveRoute 'addTree' }} visible-xs">
-            <a id="addTree" href="{{ pathFor 'addTree'}}">
-              <span class="glyphicon glyphicon-plus"></span>
-              Add an Entry
-            </a>
-          </li>
-
-
-          {{/if}}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
@@ -66,6 +43,12 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 {{#if isInRole 'admin'}}
+                  <li class="{{ isActiveRoute 'uploadCSV' }}">
+                    <a id="addTree" href="{{ pathFor 'uploadCSV'}}">
+                      <span class="glyphicon glyphicon-upload"></span>
+                      Upload CSV
+                    </a>
+                  </li>
                   <li>
                     <a href="{{pathFor 'admin'}}">
                        <span class="glyphicon glyphicon-wrench"></span>
