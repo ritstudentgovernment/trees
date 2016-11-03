@@ -1,8 +1,15 @@
-Template.addTree.events({
+////////////////////////////////////////////////////////////////////////////////
+///                   editTree.js
+///
+///Author   : Omar De La Hoz (oed7416@rit.edu)
+///Description  : Javascript file for editTree template.
+///Date Created : 09/27/16
+///updated      : 11/01/16
+////////////////////////////////////////////////////////////////////////////////
+
+Template.editTree.events({
   'click #geoLoc' : function(e){
     e.preventDefault();
-
-    //WARNING: Requires SSL certificate for location to work on mobile.
     window.navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
   }
 });

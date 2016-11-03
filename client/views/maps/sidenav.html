@@ -15,9 +15,21 @@
         <b>Diameter: </b> {{diameter}}<br>
         <b>Est. Height: </b> {{height}}<br>
         <br><b>Notes</b><br>
-        {{notes}}
-        {{#if isInRole 'admin'}}
-        <button id="remove" treeId="{{_id}}" class="btn btn-primary" style="width:100%;margin-top:15px;">Remove Tree</button>
+        {{notes}}<br>
+        {{#if canReview}}
+            <button id="edit" treeId="{{_id}}" class="btn btn-primary" style="width:100%;margin-top:15px;">Edit Tree</button>
+            {{#if approved}}
+                <button id="remove" treeId="{{_id}}" class="btn btn-primary" style="width:100%;margin-top:15px;">Remove Tree</button>
+            {{else}}
+                <div class="btn-group" style="width: 100%; padding:0px;">
+                <button id="approve" treeId="{{_id}}" class="btn btn-success" style="margin-top:15px;width:50%;">Approve</button>
+                <button id="deny" treeId="{{_id}}" class="btn btn-danger" style="margin-top:15px;width:50%;">Deny</button>
+                </div>
+            {{/if}}
+        {{else}}
+            {{#if ownPending approved}}
+                <br><p style="font-weight: bold;">Your Tree is currently under review, please check back later!</p><br>
+            {{/if}}
         {{/if}}
     </div>
 

@@ -15,21 +15,11 @@ Trees.attachSchema( new SimpleSchema({
     label: "Diameter",
     type: String,
     optional: true,
-    autoValue: function(){
-      if(!this.isSet){
-        return 'None Listed'
-      }
-    }
   },
   height: {
     label: "Estimated Height",
     type: String,
     optional: true,
-    autoValue: function(){
-      if(!this.isSet){
-        return 'None Listed'
-      }
-    }
   },
   species: {
     label: "Species",
@@ -40,26 +30,44 @@ Trees.attachSchema( new SimpleSchema({
     label: "Notes",
     type: String,
     optional: true,
-    autoValue: function(){
-      if(!this.isSet){
-        return 'None Listed'
-      }
-    }
   },
   picture:{
     type: String,
     optional: true
+  },
+  approved:{
+    type: Boolean,
+    optional: false,
+    autoValue: function(){
+      if(Roles.userIsInRole(Meteor.userId(), ['admin','reviewer'])){
+
+        return true;
+
+      }
+      else{
+        return false;
+      }
+    }
+  },
+  creatorId: {
+    type: String,
+    max: 50
   }
 }));
 
 Trees.allow({
   insert: function () { return Meteor.user(); },
-  update: function (userId) { return Roles.userIsInRole(userId, ['admin']); },
-  remove: function (userId) { return Roles.userIsInRole(userId, ['admin']); },
+  update: function (userId) { return Roles.userIsInRole(userId, ['admin','reviewer']); },
+  remove: function (userId, doc) { return Roles.userIsInRole(userId, ['admin','reviewer']); },
 });
 
 TreesFS = new FS.Collection('treesFS', {
-  stores: [new FS.Store.FileSystem('treesFS')]
+  stores: [new FS.Store.FileSystem('treesFS', {
+    transformWrite: function(fileObj, readStream, writeStream) {
+      // Depends on GraphicsMagick.
+      gm(readStream, fileObj.name).resize(300, 300).autoOrient().stream().pipe(writeStream);
+    }
+  })]
 });
 
 TreesFS.allow({
