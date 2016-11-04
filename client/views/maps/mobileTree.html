@@ -1,8 +1,67 @@
+<!--
+////////////////////////////////////////////////////////////////////////////////
+///										mobileTree.html
+///
+///Author		: Omar De La Hoz
+///Description	: Bottom bar for mobile representation of selected tree.
+///Date Created	:
+///updated		: 10/28/16
+////////////////////////////////////////////////////////////////////////////////
+-->
+
 <template name="mobileTree">
     <div class="side-header">
-      <h3 class="no-margin">{{species}}</h3>
+      <h3 class="no-margin">
+	      {{species}}
+	      {{#if picture}}
+	      	<button class="btn-min">
+	      		<span id="previewImg" treeId="{{_id}}" class="glyphicon glyphicon-picture"></span>
+	      	</button>
+	      {{/if}}
+      </h3>
       <p class="no-margin">{{treeCount species}} tree(s) of this type</p>
-      <p class="no-margin">Latitude: {{lat}}</p>
-      <p class="no-margin">Longitude: {{lng}}</p>
+      <p class="no-margin">Est. Height: {{height}}</p>
+      <p class="no-margin">Diameter: {{diameter}}</p>
+      <p class="no-margin">Notes:</p>
+      <p class="no-margin" style="font-size: 13px;">{{notes}}</p>
+
+      {{#if canReview}}
+        <button type="button" class="btn btn-info" data-toggle="modal" style="width:100%;margin-top:15px;" data-target="#modModal">
+          Moderate
+        </button>
+      {{else}}
+        {{#if ownPending approved}}
+          <br><p style="font-weight: bold;">Your Tree is currently under review, please check back later!</p><br>
+        {{/if}}
+      {{/if}}
+
+      <!--### Modal for moderation pop-up ###-->
+      <div class="modal fade" id="modModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel" style="color: #000;">Moderate Tree</h4>
+            </div>
+            <div class="modal-body">
+              <a href="editTree/{{_id}}"><button treeId="{{_id}}" class="btn btn-primary" style="width:100%;margin-top:15px;">Edit Tree</button></a>
+              {{#if approved}}
+                <button id="remove" treeId="{{_id}}" class="btn btn-danger" style="width:100%;margin-top:15px;">Remove Tree</button>
+              {{else}}
+                <div class="btn-group" style="width: 100%; padding:0px;">
+                  <button id="approve" treeId="{{_id}}" class="btn btn-success" style="margin-top:15px;width:50%;">Approve</button>
+                  <button id="deny" treeId="{{_id}}" class="btn btn-danger" style="margin-top:15px;width:50%;">Deny</button>
+                </div>
+              {{/if}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
     </div>
 </template>
