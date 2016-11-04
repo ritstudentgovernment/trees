@@ -38,6 +38,11 @@ Meteor.users.attachSchema(new SimpleSchema({
     type: Object,
     optional: true,
     blackbox: true
+  },
+  likesEmail: {
+    type: Boolean,
+    optional: false,
+    defaultValue: true,
   }
 }));
 
