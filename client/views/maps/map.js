@@ -175,6 +175,7 @@ Template.mapMain.onCreated(function() {
           draggable: true,
           animation: google.maps.Animation.DROP,
           position: event.latLng,
+          icon: previewimage,
           map: map.instance
         });
 
