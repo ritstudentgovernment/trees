@@ -60,6 +60,9 @@ var hooksObject = {
       //Throw success message
       throwError("Your Tree was successfully updated.");
 
+      //Set the editing tree session to false
+      Session.set('editingTree',false);
+
       //Set the selected tree to the edited tree
       var tree = Trees.findOne(this.docId);
       Session.set('selectedTree', tree);
