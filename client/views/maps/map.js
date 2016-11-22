@@ -126,12 +126,12 @@ Template.mapMain.onCreated(function() {
   GoogleMaps.ready('treeMap', function(map) {
 
     var allowedBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(43.076, -77.691),
-      new google.maps.LatLng(43.094, -77.651)
+      new google.maps.LatLng(43.08138,-77.68277),
+      new google.maps.LatLng(43.087664,-77.666849)
     );
 
     //Check for dragging map outside campus
-    google.maps.event.addListener(map.instance, 'dragend', function() {
+    google.maps.event.addListener(map.instance, 'bounds_changed', function() {
 
       if (allowedBounds.contains(map.instance.getCenter())) return;
 
@@ -179,7 +179,7 @@ Template.mapMain.onCreated(function() {
           map: map.instance
         });
 
-        google.maps.event.addListener(marker, 'dragend', function(event){
+        google.maps.event.addListener(marker, 'bounds_changed', function(event){
           $('input[name=lat]').val(event.latLng.lat());
           $('input[name=lng]').val(event.latLng.lng());
         });
@@ -199,30 +199,30 @@ Template.mapMain.onCreated(function() {
 
   var image = {
     url: '/treemarker.png',
-    size: new google.maps.Size(2000, 3000),
+    size: new google.maps.Size(200, 200),
     origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(17, 34),
-    scaledSize: new google.maps.Size(25, 35)
+    anchor: new google.maps.Point(17.5, 35),
+    scaledSize: new google.maps.Size(35, 35)
   };
 
   Session.set("Image", image);
 
   var previewimage = {
     url: '/previewmarker.png',
-    size: new google.maps.Size(2000, 3000),
+    size: new google.maps.Size(200, 200),
     origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(17, 34),
-    scaledSize: new google.maps.Size(25, 35)
+    anchor: new google.maps.Point(17.5, 35),
+    scaledSize: new google.maps.Size(35, 35)
   };
 
   Session.set("previewImage", previewimage);
 
   var reviewimage = {
     url: '/reviewmarker.png',
-    size: new google.maps.Size(2000, 3000),
+    size: new google.maps.Size(200, 200),
     origin: new google.maps.Point(0, 0),
-    anchor: new google.maps.Point(17, 34),
-    scaledSize: new google.maps.Size(25, 35)
+    anchor: new google.maps.Point(17.5, 35),
+    scaledSize: new google.maps.Size(35, 35)
   };
 
   Session.set("reviewImage", reviewimage);
