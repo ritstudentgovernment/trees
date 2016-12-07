@@ -14,6 +14,8 @@ var hooksObject = {
 
       }
 
+      history.pushState({}, null, '/');
+
       if(Roles.userIsInRole(Meteor.userId(), ['reviewer','admin'])){
 
         //Throw success message

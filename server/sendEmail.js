@@ -24,6 +24,8 @@ emailUser: function(email, emailData, actionType){
   emailData.name = creator.username;
   emailData.likesEmail = creator.likesEmail;
   emailData.unsubLink = Meteor.absoluteUrl() + 'unsubscribe/' + creator._id;
+  emailData.iconLink = Meteor.absoluteUrl() + 'reviewmarker64.png';
+  console.log(emailData.iconLink);
 
   // Send email depending on action type.
   if(actionType == "treeAdded"){
